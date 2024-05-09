@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from 'react';
 
-function Filter({ onCategoryChange }) {
+function Filter({ onSearchChange }) {
+  const [searchText, setSearchText] = useState('');
+
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+    onSearchChange(e.target.value); // Pass the search text back to the parent component
+  };
+
   return (
-    <div className="Filter">
-      <input type="text" name="search" placeholder="Search..." />
-      <select name="filter" onChange={onCategoryChange}>
-        <option value="All">Filter by category</option>
-        <option value="Produce">Produce</option>
-        <option value="Dairy">Dairy</option>
-        <option value="Dessert">Dessert</option>
-      </select>
-    </div>
+    <input
+      type="text"
+      placeholder="Search..."
+      value={searchText}
+      onChange={handleChange}
+    />
   );
 }
 
